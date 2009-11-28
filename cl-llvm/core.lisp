@@ -1,6 +1,7 @@
 (in-package :llvm)
 
-(export '(module-create-with-name
+(export '(dispose-message
+          module-create-with-name
           int1-type
           int8-type
           int16-type
@@ -20,6 +21,12 @@
 
 (defctype module-ref :pointer)
 (defctype type-ref :pointer)
+
+
+;;; Error handling
+
+(defcfun ("LLVMDisposeMessage" dispose-message) :void
+  (message :pointer))
 
 
 ;;; Modules
