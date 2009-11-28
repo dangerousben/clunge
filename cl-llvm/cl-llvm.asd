@@ -3,6 +3,7 @@
 
 (defsystem :cl-llvm
   :depends-on (:cffi)
+  :serial t
   :components ((:file "cl-llvm")
                (:file "core")
                (:file "analysis")))
