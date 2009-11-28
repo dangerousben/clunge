@@ -1,6 +1,7 @@
 (in-package :llvm)
 
-(export '(int1-type
+(export '(module-create-with-name
+          int1-type
           int8-type
           int16-type
           int32-type
@@ -14,11 +15,20 @@
           ppc-fp128-type
           array-type
           pointer-type
-          vector-type
-          module-create-with-name))
+          vector-type))
+
 
 (defctype module-ref :pointer)
 (defctype type-ref :pointer)
+
+
+;;; Modules
+
+(defcfun ("LLVMModuleCreateWithName" module-create-with-name) module-ref
+  (name :string))
+
+
+;;; Types
 
 (defcfun ("LLVMInt1Type" int1-type) type-ref)
 (defcfun ("LLVMInt8Type" int8-type) type-ref)
@@ -42,6 +52,3 @@
   (element-type type-ref) (address-space :unsigned-int))
 (defcfun ("LLVMVectorType" vector-type) type-ref
   (element-type type-ref) (element-count :unsigned-int))
-
-(defcfun ("LLVMModuleCreateWithName" module-create-with-name) module-ref
-  (name :string))
